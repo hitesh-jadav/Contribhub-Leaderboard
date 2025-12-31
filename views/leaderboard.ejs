@@ -1,0 +1,31 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Leaderboard | ContribHub</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>Top Contributors</h1>
+      <div class="actions">
+        <a href="/profile">🙍‍♂️ My Profile</a>
+        <a href="/refresh">🔁 Refresh</a>
+        <a href="/logout">🚪 Logout</a>
+      </div>
+    </header>
+
+    <div class="leaderboard">
+      <% leaderboard.forEach((entry, index) => { %>
+        <div class="entry <%= currentUserId == entry.user._id ? 'highlight' : '' %>">
+          <span>#<%= index + 1 %></span>
+          <img src="<%= entry.github?.avatar_url || entry.stackoverflow?.profile_image %>" width="50"
+            onclick="window.open('<%= entry.github?.profile_url || entry.stackoverflow?.link %>', '_blank')" />
+          <div>
+            <strong><%= entry.user.name %></strong><br/>
+            👤 GitHub: <%= entry.github?.followers %> followers | 📚 SO: <%= entry.stackoverflow?.reputation %> rep
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </body>
+  </html>
